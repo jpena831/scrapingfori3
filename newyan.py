@@ -5,10 +5,11 @@ from urllib.request import urlopen
 
 
 #Twitter API credentials
-consumer_key = ""
-consumer_secret = ""
-access_key = ""
-access_secret = ""
+
+consumer_key =
+consumer_secret =
+access_key =
+access_secret =
 
 def redirect(url):
     page = urlopen(url)
@@ -62,12 +63,12 @@ def get_all_tweets(screen_name):
                         pass
                 else:
                         #got media_url - means add it to the output
-                        outtweets.append([tweet.id_str, tweet.created_at, tweet.full_text.encode("utf-8"), tweet.entities['hashtags'], tweet.entities['media'][0]['media_url']])
+                        outtweets.append([tweet.id_str, tweet.created_at, tweet.full_text.encode("utf-8"), tweet.entities['hashtags'], tweet.entities['media'][0]['media_url'], tweet.entities['user_mentions'], tweet.retweet_count, tweet.favorite_count])
 
         #write the csv  
         with open('%s_tweets.csv' % screen_name, 'w') as f:
                 writer = csv.writer(f)
-                writer.writerow(["id","created_at","text","hashtags","media_url","follower_count","likes"])
+                writer.writerow(["id","created_at","text","hashtags","media_url","user_mentions", "retweet_count", "favourites_count"])
                 writer.writerows(outtweets)
 
         pass
@@ -75,8 +76,8 @@ def get_all_tweets(screen_name):
 
 if __name__ == '__main__':
         #pass in the username of the account you want to download
-        usernames = ["taylorswift13"]
+        usernames = ["girlswhocode"]
         for x in usernames:
-                  get_all_tweets("taylorswift13")
+                  get_all_tweets("girlswhocode")
 
             #    get_all_tweets("JLo")
